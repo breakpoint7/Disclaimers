@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disclaimers", "Disclaimers.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePointListApi", "SharePointListApi\SharePointListApi.csproj", "{247810B6-B67F-49D8-8015-355C62CA7DD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisclaimersOutlook", "..\DisclaimersOutlook\DisclaimersOutlook.csproj", "{E8F15745-E4DC-42F9-A126-7B5A1AA7400A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisclaimersOutlook", "DisclaimersOutlook\DisclaimersOutlook.csproj", "{E8F15745-E4DC-42F9-A126-7B5A1AA7400A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
