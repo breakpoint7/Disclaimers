@@ -52,7 +52,7 @@ namespace SharePointListApi.Controllers
 
                 // SharePoint site and list IDs can be either GUIDs or names
                 // See https://learn.microsoft.com/en-us/graph/api/list-get?view=graph-rest-1.0&tabs=http and https://learn.microsoft.com/en-us/graph/api/resources/site?view=graph-rest-1.0#id-property
-                // Grpah Explore may be helpful in validating these calls if you have problems with the Graph Query (get it working there first, and ensure the Graph call below reflects this complete URL)
+                // Graph Explore may be helpful in validating these calls if you have problems with the Graph Query (get it working there first, and ensure the Graph call below reflects this complete URL)
                 var siteId = "<sharepoint site name or site id>";
                 var listId = "<list name or list id>";
 
