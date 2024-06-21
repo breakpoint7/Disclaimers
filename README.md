@@ -116,6 +116,8 @@ var clientSecret = "<app secret>";  // Secret key of the registered app (keep th
 var siteId = "<sharepoint site name or site id>";
 var listId = "<list name or list id>";</code>
 
+**DO NOT HARD CLIENT SECRETS INTO YOUR CODE - THIS IS FOR SAMPLE PURPOSES ONLY.  SECRETS SHOULD BE MANAGED FROM A KEY STORE SUCH AS AZURE KEY VAULT, ETC.**
+
 13. Make sure this is working before testing with the add-in.  You can rebuild the SharePointListApi project and start/debug it independently of the add-ins.
     
 Browse to https://localhost:7057/api/SharePointList and make sure it’s returning your list items.    If you are getting results here, it should work with the add-in as well.
