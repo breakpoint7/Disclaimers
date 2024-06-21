@@ -74,12 +74,15 @@ Similarly, you will need to provide the site name (or id) and list name (or id) 
 8. Click the Disclaimers project and you should see the project properties displayed in Visual Studio (this is where you can configure which Office App to test with, like Excel, PowerPoint, or Word)
 
 9. Choose the Office Desktop Client and one of the desktop apps to start with (for instance [New Excel Workbook])
- 
+    
+ ![1-solution](https://github.com/breakpoint7/Disclaimers/assets/26799308/355ed072-5353-4eec-9acc-e2ec699986ec)
+
 10. Debug->Start Debugging
 
 If everything starts correctly, you should see the add-in loaded and a task pane that looks something like this:
 
- 
+ ![2-RunningAddIn](https://github.com/breakpoint7/Disclaimers/assets/26799308/1d4d3d9e-5626-40e4-8e53-3a95c2c2ee5e)
+
 You should be able to click on Web API to get a list of hard coded response and picking one from the list will insert it into your Office App, wherever the cursor is currently located.
 
 
@@ -87,20 +90,22 @@ If the add-in fails to load, check on the section below -- Debugging Issues and 
 
 
 
-# Configuring the SharePoint for the sample
-1. From a SharePoint site, create a new list in SharePoint (you can start from a Blank list)
+# Configuring SharePoint for the sample
+1. From a SharePoint site, create a new list (you can start from a Blank list)
 2. Give it a name (e.g. –  “Disclaimers”) and remember the list name, as well as your site name, to use in later steps.
 3. The solution is looking for three columns (Title, Text, and Ver).  SharePoint always starts with a Title, so we’ll use that for the actual response.
 4. Add two other text columns, calling then “Text” and “Ver” to add a title for each response and version you might decide to use as some point.
 5. Add a new item to the list and provide some information to work with.  It should look something like this:
- 
+ ![3-SharePointList](https://github.com/breakpoint7/Disclaimers/assets/26799308/52a31dd3-fe84-410f-825b-18a6e755563b)
+
 6. For the Controller to use Graph API to access the SharePoint list, you’ll need to setup an app registration.
 Within the Azure Portal, navigate to your Entra tenant and App Registrations.  Create a new App Registration.  You should be able to use defaults, don’t worry about redirect APIs or any other settings at this point.  Give it a name, and record the Application (client) ID and the Directory (tenant) ID since you’ll need this in later steps.
 7. Navigate into Certificates & Secrets and create a new client secret.  Record this value for later steps.
 8. Navigate to API Permissions, choose Add Permission and choose Microsoft Graph.
 10. Choose Application Permission and then add the permission for Sites.ReadAll.
 11. You will need to Grant Admin consent for the permission you just added from the API Permissions screen after you add Sites.ReadAll.
- 
+ ![4-GraphPermissions](https://github.com/breakpoint7/Disclaimers/assets/26799308/0d42e3f9-fbfc-41c9-9139-56886bf0ba0f)
+
 
 12. Now, update the code in SharePointListControllers.cs with Task<IActionResult> Get() to provide the tenantId, clientId, clientSecret, siteId, and ListId from the previous steps.
     
@@ -113,9 +118,10 @@ var listId = "<list name or list id>";</code>
 13. Make sure this is working before testing with the add-in.  You can rebuild the SharePointListApi project and start/debug it independently of the add-ins.
     
 Browse to https://localhost:7057/api/SharePointList and make sure it’s returning your list items.    If you are getting results here, it should work with the add-in as well.
- 
+![5-SharePointControllerResults](https://github.com/breakpoint7/Disclaimers/assets/26799308/a1f99c78-3d4a-4da4-9803-82dbc07cd412) 
 Browse to https://localhost:7057/home.html and you should see the list items returned as options in Home.html, which is the page the add-in will load.  If this works, your add-in should work as well.
  
+![6-homepageinbrowser](https://github.com/breakpoint7/Disclaimers/assets/26799308/faac8ea4-6cc8-4f58-8108-6cb5b8c0d5f9)
 
 If this isn’t working, you probably need to double check your App Registration and/or the SharePoint site and list info.  
 Graph Explorer is super helpful for working out Graph API queries independently of your code, to make sure the site and list info work there. 
@@ -132,6 +138,7 @@ The manifests in this solution are configured to use https://localhost:7057.  If
 Debugging Office add-ins with Visual Studio involve a lot of moving parts and there are a lot of things that can go wrong—Office Client version compatibility, user/license, MFA, and security policies to name a few.  I won’t try to cover all of them here-- check out the Office add-in docs for a more comprehensive list.
 
 If the add-in tries to start before the Web App is up and running, you may see an add-in error with a Retry prompt like this:
+![7-ErrorRetry](https://github.com/breakpoint7/Disclaimers/assets/26799308/6f3f277f-3c12-4ff7-8d0f-ba953582eebc)
 
  
 Wait for your Web App to completely start and then click Retry.
@@ -141,6 +148,7 @@ You can double check to make sure the Web App is up and serving the add-in conte
 If you can load it in the browser, you’re add in should be able to load it as well and the Retry should then work.
 
 As of the time I created this, VS2022 would frequently fail to load and debug the add-on on first run and clicking Restart never worked.
+![8-ErrorRestart](https://github.com/breakpoint7/Disclaimers/assets/26799308/a0eac09a-5c41-4998-b400-5416d84a4aab)
 
  
 If you run into this, stop the debugger – change the startup project to Start without Debugging and start debugging again.  You should be able to change it back to Start later and it usually works after that.
@@ -148,6 +156,7 @@ If you run into this, stop the debugger – change the startup project to Start 
 You can also debug after the add-on loads by clicking on the task pane and choosing Attach Debugger as an alternate method.
 
  
+![9-AttachDebugger](https://github.com/breakpoint7/Disclaimers/assets/26799308/f814655c-52cf-463d-aeca-8b11e2355448)
 
 
 # Deploying to all users
@@ -160,7 +169,7 @@ Once your add-in is tested and ready to share, there are a few basic things you�
 4. Navigate to https://admin.microsoft.com/, drill into Settings and Integrated Apps.
 5. Upload Custom App (Office Add-In), provide the manifest each add-in (you’ll have to do this twice since there are two add-ins in this solution) and decide which users you want to see these.  
 Sometimes it takes a little while for them to show up after you do this.
-See Deploy add-ins in the admin center - Microsoft 365 admin | Microsoft Learn and Centralized Deployment FAQ | Microsoft Learn for more info.
+See Deploy add-ins in the admin center - Microsoft 365 admin | Microsoft Learn and Centralized Deployment FAQ | Microsoft Learn (https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-deployment-of-add-ins?view=o365-worldwide) for more info.
 
 
 **Additional/Supporting Documentation:**
