@@ -10,7 +10,7 @@ This solution consists of three projects:
 
 **SharePointListApi** – A .NET Web API project used to host the add-in code and expose web APIs that supply a list of responses – one as a basic API that returns hard coded values (you could expand this to pull from any source) and another that retrieves responses from a SharePoint list.
 
-## Requirements:
+# Requirements:
 
 Visual Studio 2022 with Office/SharePoint development workload installed.
 
@@ -85,8 +85,9 @@ If everything starts correctly, you should see the add-in loaded and a task pane
 
 You should be able to click on Web API to get a list of hard coded response and picking one from the list will insert it into your Office App, wherever the cursor is currently located.
 
+![successaddin](https://github.com/breakpoint7/Disclaimers/assets/26799308/9c320564-f53d-422b-ae9b-1130ce46aba2)
 
-If the add-in fails to load, check on the section below -- Debugging Issues and Tips
+If the add-in fails to load, check on the section below -- [Some Issues you might run into while debugging](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-deployment-of-add-ins?view=o365-worldwide)
 
 
 
@@ -132,7 +133,10 @@ For app registrations, see some of the support links below.
 
 
 
-## Some issues you might run into with debugging
+## Some issues you might run into while debugging
+
+The DisclaimersOutlook add-in will only appear when you creating a new mail message since it only interacts with the compose surface (not valid in other contexts)
+
 The manifests in this solution are configured to use https://localhost:7057.  If your environment uses something else, you’ll need to update all the URL references in the manifests.
 
 Debugging Office add-ins with Visual Studio involve a lot of moving parts and there are a lot of things that can go wrong—Office Client version compatibility, user/license, MFA, and security policies to name a few.  I won’t try to cover all of them here-- check out the Office add-in docs for a more comprehensive list.
@@ -173,6 +177,7 @@ See Deploy add-ins in the admin center - Microsoft 365 admin | Microsoft Learn a
 
 
 **Additional/Supporting Documentation:**
+
 https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app
 
 https://learn.microsoft.com/en-us/graph/api/list-get
