@@ -109,10 +109,21 @@ namespace SharePointListApi.Controllers
         {
             try
             {
+                // Set to true if you want to prioritize the order of disclaimers in the list (must define a Priorty field in SharePoint list you configure)
+                bool bPrioritizeList = false;
+
                 var client = _clientFactory.CreateClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
                 var requestUrl = $"https://graph.microsoft.com/v1.0/sites/{siteId}/lists/{listId}/items?expand=fields(select=Title,Text,Ver)";
+
+                if (bPrioritizeList)
+                {
+                    // If you want to prioritize the order of disclaimers, define a "Priority" field as Number in your list and index it
+                    // You can use this field to order the disclaimer items in the graph query 
+                    // If you are using a Priority field to order disclaimer items, this may fail until you index the field in SharePoint
+                    client.DefaultRequestHeaders.Add("Prefer", "HonorNonIndexedQueriesWarningMayFailRandomly");
+                    requestUrl = $"https://graph.microsoft.com/v1.0/sites/{siteId}/lists/{listId}/items?expand=fields(select=Title,Text,Ver)&$orderby=fields/Priority";
+                }
 
                 var response = await client.GetAsync(requestUrl);
                 response.EnsureSuccessStatusCode();
