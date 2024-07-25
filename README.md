@@ -133,8 +133,9 @@ For app registrations, see some of the support links below.
 
 
 ## Some additional use cases
-Commit 2df19159140bd3f61962752b5e46909f9663d1dd added a few more uses cases to the sample
-AltHome.html and AltHome.js added and mapped to the Document (Word) manifest to allow for multiple selection of responses and insertion into document Headers and Footers.  Simply put, you can pick multiple responses and instead of inserting into the cursor position, it adds a couple of buttons to insert into a Document's header or footer section.
+Commit 2df19159140bd3f61962752b5e46909f9663d1dd added a few more uses cases to the sample.
+
+AltHome.html and AltHome.js were added and mapped to the Document (Word) manifest to allow for multiple selection of responses and insertion into document Headers and Footers.  Simply put, you can pick multiple responses and instead of inserting into the cursor position, it adds a couple of buttons to insert into a Document's header or footer section.
 
 You might also want to prioritize the order of the responses provided to the user (most important or common responses appear at the top of the list, etc.).  An easy way to do this is to modify the SharePointListController to user an OrderBy in the Graph query.  This depends on a "Priority" (Number) column being setup in your list.  Simply add a "Priority" column, defined as a Number and you can put a numeric value in each list item that will be used to sort the query results.
 Set bPrioritizeList = true in GetSharePointListItems and it will use the alternate Graph query with an OrderBy query param to sort the list you get back.
